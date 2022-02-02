@@ -26,11 +26,13 @@ namespace StudentApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var identityPort = Configuration.GetValue<string>("IdentityPort");
+
             services.AddAuthentication("Bearer")
                                         .AddIdentityServerAuthentication("Bearer", options =>
                                         {
                                             options.ApiName = "ExcpApi";
-                                            options.Authority = "https://localhost:5443";
+                                            options.Authority = identityPort;
                                         });
             services.AddControllers();
             services.AddSwaggerGen(c =>

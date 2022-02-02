@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\IDS\\identity\\Identity.csproj": {}
+    "E:\\IDS\\Identity\\Identity.csproj": {}
   },
   "projects": {
-    "E:\\IDS\\identity\\Identity.csproj": {
+    "E:\\IDS\\Identity\\Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\IDS\\identity\\Identity.csproj",
+        "projectUniqueName": "E:\\IDS\\Identity\\Identity.csproj",
         "projectName": "Identity",
-        "projectPath": "E:\\IDS\\identity\\Identity.csproj",
+        "projectPath": "E:\\IDS\\Identity\\Identity.csproj",
         "packagesPath": "C:\\Users\\laptop\\.nuget\\packages\\",
-        "outputPath": "E:\\IDS\\identity\\obj\\",
+        "outputPath": "E:\\IDS\\Identity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,11 +52,23 @@
               "target": "Package",
               "version": "[4.1.2, )"
             },
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
@@ -73,6 +85,10 @@
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

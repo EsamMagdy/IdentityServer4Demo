@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\IDS\\studentapi\\StudentApi.csproj": {}
+    "E:\\IDS\\StudentApi\\StudentApi.csproj": {}
   },
   "projects": {
-    "E:\\IDS\\studentapi\\StudentApi.csproj": {
+    "E:\\IDS\\StudentApi\\StudentApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\IDS\\studentapi\\StudentApi.csproj",
+        "projectUniqueName": "E:\\IDS\\StudentApi\\StudentApi.csproj",
         "projectName": "StudentApi",
-        "projectPath": "E:\\IDS\\studentapi\\StudentApi.csproj",
+        "projectPath": "E:\\IDS\\StudentApi\\StudentApi.csproj",
         "packagesPath": "C:\\Users\\laptop\\.nuget\\packages\\",
-        "outputPath": "E:\\IDS\\studentapi\\obj\\",
+        "outputPath": "E:\\IDS\\StudentApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",

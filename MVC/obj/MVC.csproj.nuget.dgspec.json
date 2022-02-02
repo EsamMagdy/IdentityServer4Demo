@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\IDS\\mvc\\MVC.csproj": {}
+    "E:\\IDS\\MVC\\MVC.csproj": {}
   },
   "projects": {
-    "E:\\IDS\\mvc\\MVC.csproj": {
+    "E:\\IDS\\MVC\\MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\IDS\\mvc\\MVC.csproj",
+        "projectUniqueName": "E:\\IDS\\MVC\\MVC.csproj",
         "projectName": "MVC",
-        "projectPath": "E:\\IDS\\mvc\\MVC.csproj",
+        "projectPath": "E:\\IDS\\MVC\\MVC.csproj",
         "packagesPath": "C:\\Users\\laptop\\.nuget\\packages\\",
-        "outputPath": "E:\\IDS\\mvc\\obj\\",
+        "outputPath": "E:\\IDS\\MVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",

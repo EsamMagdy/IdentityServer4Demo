@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NRIvv6lFzPrF3kCR6N78/1bQF41lJUZdq2aFybItRrZ2/9uQZhXU2mG+pH6GNza7XHzZCCVOfr1/qmXaadXBYQ==",
+  "dgSpecHash": "YAXlGqJaBLRKrBg4KtDStrXsbhetnV19Cx5fCSnAds93qL42r7pnTpx+1Hutd7ChRMBCQw8Y5LdWkhTZWaBloA==",
   "success": true,
-  "projectFilePath": "E:\\IDS\\mvc\\MVC.csproj",
+  "projectFilePath": "E:\\IDS\\MVC\\MVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\laptop\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",

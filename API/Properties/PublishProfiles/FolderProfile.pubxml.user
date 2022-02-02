@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\IDS_Publish\Api</_PublishTargetUrl>
+    <History>True|2022-01-30T11:06:14.5129270Z;True|2022-01-30T12:59:13.4733020+02:00;True|2022-01-30T12:51:02.5591463+02:00;True|2022-01-30T11:11:33.2550011+02:00;True|2022-01-30T11:09:55.4273681+02:00;</History>
+  </PropertyGroup>
+</Project>

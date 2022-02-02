@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using MVC.Models;
 using Newtonsoft.Json;
 using WeatherMVC.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace MVC.Controllers
 {
@@ -18,20 +19,33 @@ namespace MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITokenService _tokenService;
+        private readonly IConfiguration _config;
 
-        public HomeController(ITokenService tokenService, ILogger<HomeController> logger)
+
+        public HomeController(ITokenService tokenService, ILogger<HomeController> logger, IConfiguration config)
         {
             _tokenService = tokenService;
             _logger = logger;
+            _config = config;
         }
 
         public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetToken()
+        {
+            using (var client = new HttpClient())
+            {
+                var tokenResponse = await _tokenService.GetToken("weatherapi.read");
+                return PartialView("~/Views/Home/Partials/TokenData.cshtml", new TokenData { Token = tokenResponse.AccessToken });
+            }
+        }
 
         public IActionResult Privacy()
         {
+
             return View();
         }
         [Authorize]
@@ -46,7 +60,7 @@ namespace MVC.Controllers
                 client.SetBearerToken(tokenResponse.AccessToken);
 
                 var result = client
-                            .GetAsync("https://localhost:5445/WeatherForecast")
+                            .GetAsync(_config.GetValue<string>("ApiUrl"))
                             .Result;
 
                 if (result.IsSuccessStatusCode)

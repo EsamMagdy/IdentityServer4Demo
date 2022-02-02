@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\IDS_Publish\Mvc</_PublishTargetUrl>
+    <History>True|2022-01-31T14:41:45.3536568Z;True|2022-01-31T16:38:00.6293996+02:00;True|2022-01-31T16:01:34.8360696+02:00;True|2022-01-31T16:01:16.8850096+02:00;True|2022-01-31T15:56:55.6259251+02:00;True|2022-01-31T15:56:44.7286486+02:00;True|2022-01-31T15:30:03.8964771+02:00;True|2022-01-31T15:24:10.3757806+02:00;True|2022-01-31T15:22:06.0726664+02:00;True|2022-01-31T15:10:46.1101959+02:00;True|2022-01-31T15:09:14.0768231+02:00;True|2022-01-31T13:40:15.5651032+02:00;True|2022-01-30T13:14:15.0422117+02:00;True|2022-01-30T11:12:34.5957268+02:00;</History>
+  </PropertyGroup>
+</Project>

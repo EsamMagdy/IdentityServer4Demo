@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2Qg89zvDyYmElzbcHbkFlUsQYevpGnlh9P8DLwmRBRm6WYjtx5tPWU1RgZdXlMybjCC66VqN3QJHc+nz4a6gdw==",
+  "dgSpecHash": "yEzrvi9YhSiOkk5ttr45eYj6ZLGct40jyIu2Aw1br4YzGsIBIcWDPRb7DMJpalYquXEAji0Fad2p3Dm6s5yGkw==",
   "success": true,
-  "projectFilePath": "E:\\IDS\\studentapi\\StudentApi.csproj",
+  "projectFilePath": "E:\\IDS\\StudentApi\\StudentApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\laptop\\.nuget\\packages\\identitymodel\\4.0.0\\identitymodel.4.0.0.nupkg.sha512",
     "C:\\Users\\laptop\\.nuget\\packages\\identitymodel.aspnetcore.oauth2introspection\\4.0.1\\identitymodel.aspnetcore.oauth2introspection.4.0.1.nupkg.sha512",

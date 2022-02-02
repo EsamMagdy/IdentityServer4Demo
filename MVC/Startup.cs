@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,16 +35,16 @@ namespace MVC
                 .AddCookie("cookie")
                 .AddOpenIdConnect("oidc", options =>
                     {
-                        options.Authority = Configuration["InteractiveServiceSettings:AuthorityUrl"];
-                        options.ClientId = Configuration["InteractiveServiceSettings:ClientId"];
-                        options.ClientSecret = Configuration["InteractiveServiceSettings:ClientSecret"];
+                        options.Authority = Configuration["IdentityServerSettings:DiscoveryUrl"];
+                        options.ClientId = Configuration["IdentityServerSettings:ClientName"];
+                        options.ClientSecret = Configuration["IdentityServerSettings:ClientPassword"];
 
                         // to specify the flow we want to use when talking to identity server and this specifies that we're using the authorization code flow we 
                         options.ResponseType = "code";
                         options.UsePkce = true;
                         options.ResponseMode = "query";
 
-                        options.Scope.Add(Configuration["InteractiveServiceSettings:Scopes:0"]);
+                        options.Scope.Add(Configuration["IdentityServerSettings:Scopes:0"]);
                         // to save access token and that makes these available to other parts of our code 
                         options.SaveTokens = true;
 

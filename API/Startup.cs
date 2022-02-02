@@ -26,11 +26,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var identityPort = Configuration.GetValue<string>("IdentityPort");
+
             services.AddAuthentication("Bearer")
                             .AddIdentityServerAuthentication("Bearer", options =>
                             {
                                 options.ApiName = "weatherapi";
-                                options.Authority = "https://localhost:5443";
+                                options.Authority = identityPort;
                             });
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -45,11 +47,12 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-
-            app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseAuthentication();

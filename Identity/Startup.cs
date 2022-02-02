@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
+using IdentityServerHost.Quickstart.UI;
 
 namespace Identity
 {
@@ -33,10 +35,23 @@ namespace Identity
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(connectionString, sqlOption => sqlOption.MigrationsAssembly(migrationsAssembly)));
+                options.UseSqlServer(connectionString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                                                                                                                              // opt.SignIn.RequireConfirmedEmail = true;
+            })
+
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddSignInManager<SignInManager<ApplicationUser>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+                 
             // services.AddIdentityServer()
             //    .AddInMemoryClients(Config.Clients)
             //    .AddInMemoryIdentityResources(Config.IdentityResources)
@@ -46,20 +61,32 @@ namespace Identity
             //    .AddDeveloperSigningCredential();
 
             services.AddIdentityServer()
-               .AddAspNetIdentity<IdentityUser>()
-               .AddConfigurationStore(options =>
-               {
-                   options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
-                   opt => opt.MigrationsAssembly(migrationsAssembly)); // to tell identity framework which assembly is hosting the migration 
-               })
-               .AddOperationalStore(options =>
-               {
-                   options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
-                   opt => opt.MigrationsAssembly(migrationsAssembly));
-               })
+               .AddAspNetIdentity<ApplicationUser>()
+               //.AddConfigurationStore(options =>
+               //{
+               //    options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString); // to tell identity framework which assembly is hosting the migration 
+               //})
+                   //.AddOperationalStore(options =>
+                   //{
+                   //    options.ConfigureDbContext = builder => builder.UseSqlite(connectionString,
+                   //    opt => opt.MigrationsAssembly(migrationsAssembly));
+                   //})
+                   .AddInMemoryClients(Config.Clients)
+                   .AddInMemoryIdentityResources(Config.IdentityResources)
+                   .AddInMemoryApiResources(Config.ApiResources)
+                   .AddInMemoryApiScopes(Config.ApiScopes)
                .AddDeveloperSigningCredential();
-
+            services.Configure<IdentityServerSettings>(Configuration.GetSection("IdentityServerSettings"));
+            services.AddSingleton<ITokenService, TokenService>();
             services.AddControllersWithViews();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddSwaggerGen(c =>
+           {
+               c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +95,8 @@ namespace Identity
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
             app.UseRouting();

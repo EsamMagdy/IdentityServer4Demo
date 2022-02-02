@@ -15629,6 +15629,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\IDS\\MVC\\Views\\Home\\Partials\\TokenData.cshtml",
+      "TargetPath": "Views\\Home\\Partials\\TokenData.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\IDS\\MVC\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
