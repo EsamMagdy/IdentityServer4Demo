@@ -72,54 +72,62 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginInputModel model)
         {
-            // return new HttpResponseMessage(HttpStatusCode.OK);
-            if (ModelState.IsValid)
+            try
             {
-                var user = _signInManager.UserManager.Users.FirstOrDefault(t => t.PhoneNumber == model.Username);
-
-                if (user == null)
+                if (ModelState.IsValid)
                 {
-                    //return new HttpResponseMessage(HttpStatusCode.NotFound);
-                    return NotFound(new ResponseDto<string> { Message = "من فضلك تاكد من البريد الالكترونى" });
-                }
-                // validate username/password against in-memory store
-
-                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, true);
-                if (!result.Succeeded)
-                {
-
-                    return NotFound(new ResponseDto<string> { Message = "من فضلك تاكد من الرقم السرى" });
-                }
-
-
-
-                // only set explicit expiration here if user chooses "remember me". 
-                // otherwise we rely upon expiration configured in cookie middleware.
-                AuthenticationProperties props = null;
-                if (AccountOptions.AllowRememberLogin && model.RememberLogin)
-                {
-                    props = new AuthenticationProperties
+                    var user = _signInManager.UserManager.Users.FirstOrDefault(t => t.PhoneNumber == model.Username);
+                    
+                    if (user == null)
                     {
-                        IsPersistent = true,
-                        ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
+                        //return new HttpResponseMessage(HttpStatusCode.NotFound);
+                        return NotFound(new ResponseDto<string> { Message = "من فضلك تاكد من البريد الالكترونى" });
+                    }
+                    // validate username/password against in-memory store
+
+                    var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, true);
+                    if (!result.Succeeded)
+                    {
+
+                        return NotFound(new ResponseDto<string> { Message = "من فضلك تاكد من الرقم السرى" });
+                    }
+
+
+
+                    // only set explicit expiration here if user chooses "remember me". 
+                    // otherwise we rely upon expiration configured in cookie middleware.
+                    AuthenticationProperties props = null;
+                    if (AccountOptions.AllowRememberLogin && model.RememberLogin)
+                    {
+                        props = new AuthenticationProperties
+                        {
+                            IsPersistent = true,
+                            ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
+                        };
                     };
-                };
 
-                // issue authentication cookie with subject ID and username
-                var isuser = new IdentityServerUser(user.Id)
-                {
-                    DisplayName = user.UserName
-                };
+                    // issue authentication cookie with subject ID and username
+                    var isuser = new IdentityServerUser(user.Id)
+                    {
+                        DisplayName = user.UserName
+                    };
 
-                await HttpContext.SignInAsync(isuser, props);
+                    await HttpContext.SignInAsync(isuser, props);
 
-                return Ok(new ResponseDto<string> { Data = _tokenService.GetToken("weatherapi.read").Result });
+                    return Ok(new ResponseDto<string> { Data = _tokenService.GetToken("weatherapi.read").Result });
 
 
+                }
+
+                // something went wrong, show form with error
+                return BadRequest();
             }
+            catch (Exception ex)
+            {
 
-            // something went wrong, show form with error
-            return BadRequest();
+                throw;
+            }
+           
 
         }
 
@@ -129,38 +137,48 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
-            // return new HttpResponseMessage(HttpStatusCode.OK);
-            if (ModelState.IsValid)
+            try
             {
-                if (await IsUserExistBefore(model.PhoneNumber))
+                if (ModelState.IsValid)
                 {
-                    return BadRequest(new ResponseDto<string> { Data = "username is already taken" });
+                    if (await IsUserExistBefore(model.PhoneNumber))
+                    {
+                        return BadRequest(new ResponseDto<string> { Data = "username is already taken" });
+                    }
+
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.PhoneNumber,
+                        PhoneNumber = model.PhoneNumber,
+                        Email = model.Email,
+                        EmailConfirmed = true,
+                        //Name = RegisterDto.FirstName.Trim() + " " + userModel.MiddleName.Trim() + " " + userModel.LastName.Trim(),
+                        CreatedOn = DateTime.Now,
+                        ModifiedOn = DateTime.Now,
+                        IsDeleted = false,
+                        IsDeactivated = false
+                        //ConcurrencyStamp="",
+                        //LockoutEnabled=false,
+                        //LockoutEnd=new DateTimeOffset()
+
+                    };
+
+                    var result = await _userManager.CreateAsync(user,model.Password);
+
+                    if (!result.Succeeded) return null;
+
+                    await _userManager.AddToRoleAsync(user, "User");
+                    return Ok(new ResponseDto<string> { Data = _tokenService.GetToken("weatherapi.read").Result });
                 }
-
-                var user = new ApplicationUser
-                {
-                    UserName = model.PhoneNumber,
-                    PhoneNumber = model.PhoneNumber,
-                    Email = model.Email,
-                    //Name = RegisterDto.FirstName.Trim() + " " + userModel.MiddleName.Trim() + " " + userModel.LastName.Trim(),
-                    CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
-                    IsDeleted = false,
-                    IsDeactivated = false
-                    //ConcurrencyStamp="",
-                    //LockoutEnabled=false,
-                    //LockoutEnd=new DateTimeOffset()
-
-                };
-
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (!result.Succeeded) return null;
-
-                await _userManager.AddToRoleAsync(user, "User");
-                return Ok(new ResponseDto<string> { Data = _tokenService.GetToken("weatherapi.read").Result });
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+            // return new HttpResponseMessage(HttpStatusCode.OK);
+           
 
 
 

@@ -43,6 +43,7 @@ namespace Identity
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireUppercase = false;
+                opt.Password.RequiredLength= 6;
                                                                                                                               // opt.SignIn.RequireConfirmedEmail = true;
             })
 

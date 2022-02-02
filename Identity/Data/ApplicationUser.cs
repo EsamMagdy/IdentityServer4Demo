@@ -31,19 +31,19 @@ public class ApplicationUser : IdentityUser
     public string Name { get; set; }
     public DateTime? DeletedOn { get; set; }
     public string DeletedBy { get; set; }
-    public string OwnerId { get; set; }
-    public ApplicationUser Owner { get; set; }
+    //public string OwnerId { get; set; }
+    //public ApplicationUser Owner { get; set; }
     public DateTime? LastLogin { get; set; }
-    [NotMapped]
-    public override string NormalizedEmail { get => base.NormalizedEmail; set => base.NormalizedEmail = value; }
-    [NotMapped]
-    public override string ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
-    [NotMapped]
-    public override string NormalizedUserName { get => base.NormalizedUserName; set => base.NormalizedUserName = value; }
-    [NotMapped]
-    public override bool LockoutEnabled { get => base.LockoutEnabled; set => base.LockoutEnabled = value; }
-    [NotMapped]
-    public override DateTimeOffset? LockoutEnd { get => base.LockoutEnd; set => base.LockoutEnd = value; }
+    //[NotMapped]
+    //public override string NormalizedEmail { get => base.NormalizedEmail; set => base.NormalizedEmail = value; }
+    //[NotMapped]
+    //public override string ConcurrencyStamp { get => base.ConcurrencyStamp; set => base.ConcurrencyStamp = value; }
+    //[NotMapped]
+    //public override string NormalizedUserName { get => base.NormalizedUserName; set => base.NormalizedUserName = value; }
+    //[NotMapped]
+    //public override bool LockoutEnabled { get => base.LockoutEnabled; set => base.LockoutEnabled = value; }
+    //[NotMapped]
+    //public override DateTimeOffset? LockoutEnd { get => base.LockoutEnd; set => base.LockoutEnd = value; }
     #endregion
 
 

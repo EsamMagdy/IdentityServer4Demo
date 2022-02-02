@@ -11,17 +11,21 @@ namespace Identity
         {
 
         }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<ApplicationUser>(userRole =>
+            builder.Entity<IdentityUser>(userRole =>
             {
-                userRole.Ignore(s => s.NormalizedEmail);
-                userRole.Ignore(s => s.NormalizedUserName);
-                userRole.Ignore(s => s.ConcurrencyStamp);
-                userRole.Ignore(s => s.LockoutEnabled);
-                userRole.Ignore(s => s.LockoutEnd);
+                
+                //userRole.Property(s => s.Name).HasMaxLength(500);
+                //userRole.Property(s => s.NormalizedUserName).HasMaxLength(500).HasColumnName("Name");
+                //userRole.Property(s => s.NormalizedEmail).HasMaxLength(500).HasColumnName("Name");
+                //userRole.Ignore(s => s.NormalizedEmail);
+                //userRole.Ignore(s => s.NormalizedUserName);
+                //userRole.Ignore(s => s.ConcurrencyStamp);
+                //userRole.Ignore(s => s.LockoutEnabled);
+                //userRole.Ignore(s => s.LockoutEnd);
             });
         }
 
